@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01 - Pomodoro || Advent of JavaScript</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>01 - Pomodoro || Advent of JavaScript</title>
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-
-<body>
-
-  <div class="wrapper">
-    <div class="ring">
-      <svg width="518" height="518" viewBox="0 0 518 518">
-        <circle stroke-width="9px" x="0" y="y" cx="259" cy="259" r="254" />
-      </svg>
-    </div>
-
-    <div class="timer">
-      <div class="time">
-        <div class="minutes">
-          <input type="text" value="15" disabled />
-        </div>
-        <div class="colon">:</div>
-        <div class="seconds">
-          <input type="text" value="00" disabled />
-        </div>
+  <body>
+    <div class="wrapper">
+      <div class="ring">
+        <svg width="518" height="518" viewBox="0 0 518 518">
+          <circle stroke-width="9px" x="0" y="y" cx="259" cy="259" r="254" />
+        </svg>
       </div>
-      <button class="start">start</button>
-      <button class="settings">
-        <img src="images/gear.svg" alt="Settings" />
-      </button>
+
+      <div class="timer">
+        <div class="time">
+          <div class="minutes">
+            <input type="text" value="15" disabled title="Minutes" class="minutes" />
+            <!-- <label for="minutes">Minutes</label> -->
+          </div>
+          <div class="colon">:</div>
+          <div class="seconds">
+            <input type="text" value="00" disabled title="Seconds" class="seconds" />
+            <!-- <label for="seconds">Seconds</label> -->
+          </div>
+        </div>
+        <button class="start" type="button">
+          <span class="material-symbols-outlined">play_arrow</span>
+        </button>
+      </div>
     </div>
-  </div>
 
-</body>
-
+    <button class="settings" type="button">
+      <span class="material-symbols-outlined">settings</span>
+    </button>
+    <script src="./app.js"></script>
+  </body>
 </html>

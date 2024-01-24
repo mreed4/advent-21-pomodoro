@@ -1,108 +1,200 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
+
+:root {
+  --green: #09a65a;
+  --red: #900a0a;
+  --yellow: #f2c94c;
+}
 
 body {
+  font-family: "Unica One", sans-serif;
   align-items: center;
-  background: #2b2a30;
+  background: gray;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: 0;
   min-height: 100vh;
   min-width: 100vw;
   padding: 0;
+  transition: background 0.2s ease-in-out;
 }
 
-/* outer glow */
+body.on {
+  background: #2b2a30;
+}
+
 .wrapper {
   align-items: center;
   border-radius: 50%;
-  box-shadow: -5px 14px 44px #000000, 5px -16px 50px rgba(255, 255, 255, 0.15);
+  box-shadow: -5px 14px 44px transparent, 5px -16px 50px rgba(255, 255, 255, 0.15);
   display: flex;
   height: 518px;
   justify-content: center;
   position: relative;
   width: 518px;
+  /* scale: 1; */
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.wrapper.on {
+  animation: glow 1000ms ease-in-out infinite alternate;
+  box-shadow: -5px 14px 44px var(--green), 5px -16px 50px rgba(255, 255, 255, 0.15), 0px 0px 114px rgba(0, 0, 0, 0.45);
+  /* scale: 0.75; */
 }
 
 .ring {
   position: absolute;
   left: 0;
-  stroke: #09a65a;
+  stroke: transparent;
   top: 0;
   z-index: 1;
+}
+
+.ring.on {
+  stroke: #09a65a;
 }
 
 .ring.ending circle {
   stroke: #900a0a;
 }
 
-/* inner circle */
 .timer {
+  position: relative;
   align-items: center;
   background: radial-gradient(71.4% 71.4% at 51.7% 28.6%, #3a393f 0%, #17171a 100%);
   border-radius: 50%;
-  box-shadow: inset 0px 0px 114px rgba(0, 0, 0, 0.45);
   color: white;
   display: flex;
   flex-direction: column;
   height: 500px;
   justify-content: center;
-  position: relative;
+  align-items: center;
   width: 500px;
   z-index: 2;
 }
 
-/* actual time */
 .time {
+  position: absolute;
+  top: 140px;
   display: flex;
-  font-family: "Bebas Neue", cursive;
-  font-size: 196px;
-  margin: 30px auto;
-  position: relative;
-  top: 30px;
+}
+
+.colon {
+  padding-top: 25px;
+  font-size: 160px;
+  margin: 0;
+  transition: color 0.2s ease-in-out;
+  color: inherit;
+}
+
+.colon.on {
+  color: var(--green);
+  animation: pulse 1000ms ease-in-out infinite alternate;
 }
 
 input[type="text"] {
+  font-family: "Unica One", sans-serif;
   border: 0;
-  border-bottom: 1px dashed white;
-  background: none;
+  background-color: transparent;
   color: white;
-  font-family: "Bebas Neue", cursive;
   font-size: 196px;
-  height: 170px;
-  width: 150px;
+  width: 170px;
   text-align: center;
   outline: none;
+  letter-spacing: -24px;
+  padding-right: 1.5rem;
+  border-radius: 30px;
+  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  opacity: 1;
+}
+
+input[type="text"].on {
+  color: var(--green);
 }
 
 input[type="text"]:disabled {
-  border-bottom: none;
+  background-color: transparent;
+  cursor: default;
+  box-shadow: none;
+  animation: none;
+}
+
+button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 48px;
+  outline: none;
+}
+
+button:disabled {
+  opacity: 0.15;
+  cursor: default;
+  pointer-events: none;
 }
 
 .start {
-  cursor: pointer;
-  font-family: "Montserrat", sans-serif;
-  font-size: 16px;
-  letter-spacing: 10px;
-  line-height: 20px;
-  background: none;
-  color: white;
-  opacity: 0.5;
-  border: none;
-  text-transform: uppercase;
-  margin-bottom: 20px;
+  z-index: 3;
+  position: absolute;
+  bottom: 50px;
+  color: var(--green);
+  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out, filter 0.2s ease-in-out;
+  opacity: 0.85;
+  filter: brightness(1);
 }
 
 .start:hover {
   opacity: 1;
+  filter: brightness(1.25);
+}
+
+.start.on {
+  color: white;
+}
+
+.start span {
+  font-size: 48px !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .settings {
-  border: none;
-  background: none;
-  cursor: pointer;
-  opacity: 0.3;
+  opacity: 0.45;
+  /* display: block; */
 }
 
-.settings:hover {
-  opacity: 1;
+.blink {
+  animation: blink 1000ms linear infinite alternate;
+}
+
+.lower-opacity {
+  opacity: 0.25;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: -5px 14px 44px transparent, 5px -16px 50px rgba(255, 255, 255, 0.15);
+  }
+  100% {
+    box-shadow: -5px 14px 44px var(--green), 5px -16px 50px rgba(255, 255, 255, 0.15), 0px 0px 114px rgba(0, 0, 0, 0.45);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.25;
+    filter: brightness(0.75);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1.25);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
