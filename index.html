@@ -20,23 +20,26 @@
       <div class="timer">
         <div class="time">
           <div class="minutes">
-            <input type="text" value="15" disabled title="Minutes" class="minutes" />
-            <!-- <label for="minutes">Minutes</label> -->
+            <input type="text" value="00" disabled title="Minutes" class="minutes" maxlength="2" />
+            <label for="minutes">Minutes</label>
           </div>
           <div class="colon">:</div>
           <div class="seconds">
-            <input type="text" value="00" disabled title="Seconds" class="seconds" />
-            <!-- <label for="seconds">Seconds</label> -->
+            <input type="text" value="05" disabled title="Seconds" class="seconds" maxlength="2" />
+            <label for="seconds">Seconds</label>
           </div>
         </div>
         <button class="start" type="button">
           <span class="material-symbols-outlined">play_arrow</span>
         </button>
+        <button class="reset" type="button">
+          <span class="material-symbols-outlined">replay</span>
+        </button>
       </div>
     </div>
 
     <button class="settings" type="button">
-      <span class="material-symbols-outlined">settings</span>
+      <span class="material-symbols-outlined">tune</span>
     </button>
     <script src="./app.js"></script>
   </body>

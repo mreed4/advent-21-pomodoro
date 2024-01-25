@@ -2,7 +2,7 @@
 
 :root {
   --green: #09a65a;
-  --red: #900a0a;
+  --red: #e74747;
   --yellow: #f2c94c;
 }
 
@@ -20,7 +20,8 @@ body {
   transition: background 0.2s ease-in-out;
 }
 
-body.on {
+body.on,
+body.end {
   background: #2b2a30;
 }
 
@@ -33,11 +34,15 @@ body.on {
   justify-content: center;
   position: relative;
   width: 518px;
-  /* scale: 1; */
   transition: box-shadow 0.2s ease-in-out;
 }
 
-.wrapper.on {
+body.end .wrapper {
+  animation: glow-red 1000ms ease-in-out infinite alternate;
+  box-shadow: -5px 14px 44px var(--red), 5px -16px 50px rgba(255, 255, 255, 0.15), 0px 0px 114px rgba(0, 0, 0, 0.45);
+}
+
+body.on .wrapper {
   animation: glow 1000ms ease-in-out infinite alternate;
   box-shadow: -5px 14px 44px var(--green), 5px -16px 50px rgba(255, 255, 255, 0.15), 0px 0px 114px rgba(0, 0, 0, 0.45);
   /* scale: 0.75; */
@@ -51,12 +56,12 @@ body.on {
   z-index: 1;
 }
 
-.ring.on {
+body.on .ring {
   stroke: #09a65a;
 }
 
-.ring.ending circle {
-  stroke: #900a0a;
+body.end .ring {
+  stroke: var(--red);
 }
 
 .timer {
@@ -74,6 +79,12 @@ body.on {
   z-index: 2;
 }
 
+body.on .timer {
+  /* background: linear-gradient(90deg, #09a65a 0%, #f2c94c 100%); */
+  background-size: 200% 200%;
+  animation: pulse-timer-gradient 1000ms ease-in-out infinite alternate;
+}
+
 .time {
   position: absolute;
   top: 140px;
@@ -88,7 +99,7 @@ body.on {
   color: inherit;
 }
 
-.colon.on {
+body.on .colon {
   color: var(--green);
   animation: pulse 1000ms ease-in-out infinite alternate;
 }
@@ -102,15 +113,21 @@ input[type="text"] {
   width: 170px;
   text-align: center;
   outline: none;
-  letter-spacing: -24px;
+  letter-spacing: -20px;
   padding-right: 1.5rem;
   border-radius: 30px;
   transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
   opacity: 1;
 }
 
-input[type="text"].on {
+body.on input[type="text"] {
   color: var(--green);
+}
+
+body.end input[type="text"],
+body.end .colon {
+  color: var(--red);
+  animation: blink 1000ms linear infinite alternate;
 }
 
 input[type="text"]:disabled {
@@ -118,6 +135,24 @@ input[type="text"]:disabled {
   cursor: default;
   box-shadow: none;
   animation: none;
+}
+
+.minutes,
+.seconds {
+  position: relative;
+  z-index: 2;
+}
+
+label {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  /* display: block;
+  width: 170px;
+  text-align: center; */
+  font-weight: normal;
+  /* text-transform: uppercase; */
+  opacity: 0.5;
 }
 
 button {
@@ -135,6 +170,36 @@ button:disabled {
   pointer-events: none;
 }
 
+body.end .start {
+  display: none;
+}
+
+body.end .reset {
+  display: block;
+  z-index: 3;
+  position: absolute;
+  bottom: 50px;
+  /* color: var(--yellow); */
+  transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out, filter 0.2s ease-in-out;
+  opacity: 0.85;
+  filter: brightness(1);
+}
+
+body.end .reset:hover {
+  opacity: 1;
+  filter: brightness(1.25);
+}
+
+.reset {
+  display: none;
+}
+
+.reset span {
+  font-size: 48px !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
 .start {
   z-index: 3;
   position: absolute;
@@ -150,7 +215,7 @@ button:disabled {
   filter: brightness(1.25);
 }
 
-.start.on {
+body.on .start {
   color: white;
 }
 
@@ -163,6 +228,11 @@ button:disabled {
 .settings {
   opacity: 0.45;
   /* display: block; */
+}
+
+.settings.on {
+  opacity: 1;
+  color: var(--yellow);
 }
 
 .blink {
@@ -182,6 +252,15 @@ button:disabled {
   }
 }
 
+@keyframes glow-red {
+  0% {
+    box-shadow: -5px 14px 44px transparent, 5px -16px 50px rgba(255, 255, 255, 0.15);
+  }
+  100% {
+    box-shadow: -5px 14px 44px var(--red), 5px -16px 50px rgba(255, 255, 255, 0.15), 0px 0px 114px rgba(0, 0, 0, 0.45);
+  }
+}
+
 @keyframes pulse {
   0% {
     opacity: 0.25;
@@ -194,7 +273,29 @@ button:disabled {
 }
 
 @keyframes blink {
-  50% {
-    opacity: 0;
+  0% {
+    opacity: 0.25;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-timer-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes body-color-pulse {
+  0% {
+    background: gray;
+  }
+  100% {
+    background: var(--red);
   }
 }
