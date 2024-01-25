@@ -1,6 +1,7 @@
 const settingsButton = document.querySelector(".settings");
 const startButton = document.querySelector(".start");
 const resetButton = document.querySelector(".reset");
+const body = document.querySelector("body");
 
 const allInputs = document.querySelectorAll("input");
 const [minutesInput, secondsInput] = [...allInputs];
@@ -9,8 +10,12 @@ const time = document.querySelector(".time");
 console.log(allInputs);
 
 document.addEventListener("keyup", (event) => {
-  if (event.code === "Space") {
+  if (!body.classList.contains("end") && event.code === "Space") {
     handleStartButton();
+  }
+
+  if (body.classList.contains("end") && event.code === "Space") {
+    handleResetButton();
   }
 });
 
