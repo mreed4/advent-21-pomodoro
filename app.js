@@ -124,17 +124,37 @@ function handleResetButton(event) {
   secondsInput.value = "05";
 }
 
+function handleSettingsButton(event) {
+  allInputs.forEach((input) => {
+    input.disabled = !input.disabled;
+  });
+
+  [...time.children].forEach((child, i) => {
+    if (child.tagName !== "LABEL") {
+      if (child.classList.contains("lower-opacity")) {
+        child.classList.remove("lower-opacity");
+      } else {
+        child.classList.add("lower-opacity");
+      }
+    }
+  });
+
+  settingsButton.classList.toggle("on");
+
+  allInputs[0].focus();
+}
+
 function toggleClock() {
   // https://inspiredwebdev.com/create-pomodoro-clock/
 
   const body = document.querySelector("body");
 
-  const isClockRunning = startButton.children[0].textContent === "pause";
+  const clockIsRunning = startButton.children[0].textContent === "pause";
 
   let totalSeconds = Number(minutesInput.value) * 60 + Number(secondsInput.value);
   let secondsRemaining = totalSeconds;
 
-  if (isClockRunning) {
+  if (clockIsRunning) {
     intervalId = setInterval(() => {
       if (secondsRemaining === 0) {
         clearInterval(intervalId);
@@ -173,24 +193,4 @@ function toggleClock() {
   } else {
     clearInterval(intervalId);
   }
-}
-
-function handleSettingsButton(event) {
-  allInputs.forEach((input) => {
-    input.disabled = !input.disabled;
-  });
-
-  [...time.children].forEach((child, i) => {
-    if (child.tagName !== "LABEL") {
-      if (child.classList.contains("lower-opacity")) {
-        child.classList.remove("lower-opacity");
-      } else {
-        child.classList.add("lower-opacity");
-      }
-    }
-  });
-
-  settingsButton.classList.toggle("on");
-
-  allInputs[0].focus();
 }
